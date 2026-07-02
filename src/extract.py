@@ -18,5 +18,5 @@ def extrair_dados(diretorio_origem_base: Path, diretorio_destino_base: Path) -> 
                 try:
                     with ZipFile(arquivo_zip) as zip_file:
                         zip_file.extractall(path=diretorio_destino_atual)
-                except BadZipeFile:
-                    print(f"{arquivo.zip} está corrompido.")
+                except BadZipFile:
+                    print(f"{arquivo_zip} está corrompido.")
