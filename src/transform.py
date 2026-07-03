@@ -3,9 +3,12 @@ import pandas as pd
 from pathlib import Path
 
 def transformar_dados(dados_extraidos: Path) -> pd.DataFrame:
+    """
+    Leitura e tratamento de cada arquivo csv, enriquece a base de dados e consolida-os.
+    """
     # Percorrer a pasta de ano
     dataframes = []
-    for sub_diretorio in dados_extraidos.iterdir():
+    for sub_diretorio in sorted(dados_extraidos.iterdir()):
         ano = sub_diretorio.name
         if sub_diretorio.is_dir():
             # Percorrer cada arquivo e leitura de cada CSV
@@ -32,9 +35,6 @@ def transformar_dados(dados_extraidos: Path) -> pd.DataFrame:
                     ],
                     default=None
                 )
-
-                # Filtro de colunas 
-                df = df[(df["Coluna"].isin(["Despesas Empenhadas", "Despesas Pagas"])) & (df["Tipo Conta"].notnull())]
 
                 # Garantindo que valor esteja formatado em número
                 df["Valor"] = pd.to_numeric(df["Valor"], errors="coerce")
