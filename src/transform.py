@@ -23,7 +23,7 @@ def transformar_dados(dados_extraidos: Path) -> pd.DataFrame:
                 )
                 
                 # Enriquecimento do DataFrame
-                df["Ano"] = ano
+                df["Ano"] = pd.to_numeric(ano, errors="coerce")
                 df["Tipo Conta"] = np.select(
                     [
                         df["Conta"].str.match(r"^\d{2} "),
@@ -33,7 +33,7 @@ def transformar_dados(dados_extraidos: Path) -> pd.DataFrame:
                         "Função",
                         "Subfunção"
                     ],
-                    default=None
+                    default="Conta especial"
                 )
 
                 # Garantindo que valor esteja formatado em número

@@ -1,10 +1,8 @@
 from pathlib import Path
-import pandas as pd
 
 from src.load import carregar_dados
 from src.extract import extrair_dados
 from src.transform import transformar_dados
-
 
 def main():
     origem = Path('dados_compactos')
