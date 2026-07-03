@@ -18,20 +18,23 @@ def transformar_dados(dados_extraidos: Path) -> pd.DataFrame:
                     decimal=",",
                     thousands='.',
                 )
-
+                
                 # Enriquecimento do DataFrame
-                df["ano"] = ano
-                df["tipo_conta"] = np.select(
+                df["Ano"] = ano
+                df["Tipo Conta"] = np.select(
                     [
                         df["Conta"].str.match(r"^\d{2} "),
                         df["Conta"].str.contains(r"\.", regex=True)
                     ],
                     [
-                        "função",
-                        "subfunção"
+                        "Função",
+                        "Subfunção"
                     ],
                     default=None
                 )
+
+                # Filtro de colunas 
+                df = df[(df["Coluna"].isin(["Despesas Empenhadas", "Despesas Pagas"])) & (df["Tipo Conta"].notnull())]
 
                 # Garantindo que valor esteja formatado em número
                 df["Valor"] = pd.to_numeric(df["Valor"], errors="coerce")
