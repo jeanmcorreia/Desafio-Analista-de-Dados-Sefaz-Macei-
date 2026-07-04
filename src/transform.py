@@ -27,13 +27,15 @@ def transformar_dados(dados_extraidos: Path) -> pd.DataFrame:
                 df["Tipo Conta"] = np.select(
                     [
                         df["Conta"].str.match(r"^\d{2} "),
-                        df["Conta"].str.contains(r"\.", regex=True)
+                        df["Conta"].str.contains(r"\.", regex=True),
+                        df["Conta"].str.contains(r"^FU", regex=True),
                     ],
                     [
                         "Função",
-                        "Subfunção"
+                        "Subfunção",
+                        "Total Demais Subfunções"
                     ],
-                    default="Conta especial"
+                    default="Totais Intraorçamentárias"
                 )
 
                 # Garantindo que valor esteja formatado em número
