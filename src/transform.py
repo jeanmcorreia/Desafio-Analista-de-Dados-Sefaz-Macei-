@@ -39,7 +39,7 @@ def transformar_dados(dados_extraidos: Path) -> pd.DataFrame:
                 )
 
                 # Garantindo que valor esteja formatado em número
-                df["Valor"] = pd.to_numeric(df["Valor"], errors="coerce")
+                # df["Valor"] = pd.to_numeric(df["Valor"], errors="coerce")
                 dataframes.append(df)
 
     return pd.concat(dataframes, ignore_index=True)
